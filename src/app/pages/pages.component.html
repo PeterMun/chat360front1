@@ -1,0 +1,102 @@
+
+
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+          <!-- Menu -->
+
+          <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+            <br>
+            <app-sidebar></app-sidebar>
+
+          </aside>
+          <!-- / Menu -->
+  
+          <!-- Layout container -->
+          <div class="layout-page">
+            <!-- Navbar -->
+            <app-header></app-header>
+  
+            <!-- / Navbar -->
+  
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+              <!-- Content -->
+  
+              <div class="container-xxl flex-grow-1 container-p-y">
+                
+                <div class="app-kanban">
+                  <!-- Add new board -->
+                  <router-outlet></router-outlet>
+                  <div class="row">
+                    <div class="col-12">
+                      <form class="kanban-add-new-board">
+                        <!-- <label class="kanban-add-board-btn" for="kanban-add-board-input"> -->
+                          <!-- <i class="ti ti-plus ti-xs"></i> -->
+                          <!-- <span class="align-middle">BLANK PAGE</span> -->
+                        <!-- </label> -->
+                        
+                       
+                      </form>
+                    </div>
+                  </div>
+  
+                  <!-- Kanban Wrapper -->
+                  <!-- <div class="kanban-wrapper"></div> -->
+  
+
+                </div>
+              </div>
+              <!-- / Content -->
+  
+              <!-- Footer -->
+              <!-- <footer class="content-footer footer bg-footer-theme">
+                <div class="container-xxl">
+                  <div
+                    class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+                    <div>
+                      ©
+                      <script>
+                        document.write(new Date().getFullYear());
+                      </script>
+                      , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="fw-medium">Pixinvent</a>
+                    </div>
+                    <div class="d-none d-lg-inline-block">
+                      <a href="https://themeforest.net/licenses/standard" class="footer-link me-4" target="_blank"
+                        >License</a
+                      >
+                      <a href="https://1.envato.market/pixinvent_portfolio" target="_blank" class="footer-link me-4"
+                        >More Themes</a
+                      >
+  
+                      <a
+                        href="https://demos.pixinvent.com/360io-html-admin-template/documentation/"
+                        target="_blank"
+                        class="footer-link me-4"
+                        >Documentation</a
+                      >
+  
+                      <a href="https://pixinvent.ticksy.com/" target="_blank" class="footer-link d-none d-sm-inline-block"
+                        >Support</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </footer> -->
+              <!-- / Footer -->
+  
+              <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+          </div>
+          <!-- / Layout page -->
+        </div>
+  
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+  
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+      </div>
+      <!-- / Layout wrapper -->
+
