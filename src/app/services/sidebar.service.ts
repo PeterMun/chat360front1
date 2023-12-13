@@ -26,11 +26,11 @@ export class SidebarService {
       icon: 'ti ti-messages',
       url: 'chat'
     },
-    {
-      title: 'Calendar',
-      icon: 'ti ti-calendar',
-      url: ''
-    },
+    // {
+    //   title: 'Calendar',
+    //   icon: 'ti ti-calendar',
+    //   url: ''
+    // },
 
 
   ];

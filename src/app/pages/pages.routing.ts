@@ -7,12 +7,14 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ChatComponent } from "./chat/chat.component";
 import { UsersComponent } from "./users/users.component";
 import { ClientsComponent } from "./clients/clients.component";
+import { authGuard } from '../guards/auth.guard';
 
 
 const routes: Routes = [
     {
         path: 'dashboard',
         component: PagesComponent,
+        canActivate: [authGuard],
         children: [
             { path: '', component: DashboardComponent },
             { path: 'chat', component: ChatComponent },

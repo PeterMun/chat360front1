@@ -19,11 +19,64 @@
                 <button class="dt-button add-new btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
                     <span>
                         <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
-                        <span class="d-none d-sm-inline-block">Add New User</span>
+                        <span class="d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New User</span>
                     </span>
                 </button> 
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Create User</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form 
+                        autocomplete="off"
+                        [formGroup]="registerForm"
+                        (ngSubmit)="createUser()"
+                  >
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Name:</label>
+                      <input type="text" class="form-control" id="recipient-name"  formControlName="name">
+                    </div>
+                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label">Last name:</label>
+                      <input type="text" class="form-control" id="recipient-name"  formControlName="last_name">
+                    </div>
+                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label">Email:</label>
+                      <input type="text" class="form-control" id="recipient-name"  formControlName="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Password:</label>
+                        <input type="text" class="form-control" id="recipient-name"  formControlName="password">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                    <label for="selectpickerSubtext" class="form-label">Rol:</label>
+                        <div class="dropdown bootstrap-select w-100">
+                            <select id="selectpickerSubtext" class="selectpicker w-100" 
+                                    data-style="btn-default" data-show-subtext="true" tabindex="null"
+                                    formControlName="rol">
+                                <option value="ADMIN">Administrator</option>
+                                <option value="OPERATOR">Operator</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                      </div>
+
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
     </div>
 </div>
 <br>
@@ -34,14 +87,14 @@
         </th>
         <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 256px;" aria-label="User: activate to sort column ascending" aria-sort="descending">User</th>
         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 116px;" aria-label="Role: activate to sort column ascending">Role</th>
-        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 74px;" aria-label="Plan: activate to sort column ascending">Plan</th>
-        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 146px;" aria-label="Billing: activate to sort column ascending">Billing</th>
+        <!-- <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 74px;" aria-label="Plan: activate to sort column ascending">Plan</th> -->
+        <!-- <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 146px;" aria-label="Billing: activate to sort column ascending">Billing</th> -->
         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 70px;" aria-label="Status: activate to sort column ascending">Status</th>
         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;" aria-label="Actions">Actions</th>
     </tr>
     </thead>
     <tbody>
-        <tr class="odd">
+        <tr class="odd" *ngFor="let user of users">
             <td class="control dtr-hidden" tabindex="0" style="display: none;">
             </td><td class="sorting_1"><div class="d-flex justify-content-start align-items-center user-name">
                 <div class="avatar-wrapper"><div class="avatar me-3">
@@ -50,9 +103,9 @@
             </div>
             <div class="d-flex flex-column">
                 <a href="app-user-view-account.html" class="text-body text-truncate">
-                    <span class="fw-medium">Zsazsa McCleverty</span>
+                    <span class="fw-medium">{{ user.name }} {{ user.last_name }}</span>
                 </a>
-                <small class="text-muted">zmcclevertyesoundcloud.com</small>
+                <small class="text-muted">{{ user.email }} </small>
             </div>
         </div>
     </td>
@@ -60,14 +113,10 @@
         <span class="text-truncate d-flex align-items-center">
             <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
                 <i class="ti ti-chart-pie-2 ti-sm"></i>
-            </span>Maintainer</span>
+            </span> {{ user.rol }} </span>
         </td>
         <td>
-            <span class="fw-medium">Enterprise</span>
-        </td>
-        <td>Auto Debit</td>
-        <td>
-            <span class="badge bg-label-success" text-capitalized="">Active</span>
+            <span class="badge bg-label-success" text-capitalized="">{{ user.status }}</span>
         </td>
         <td class="" style="">
             <div class="d-flex align-items-center">
@@ -87,434 +136,7 @@
             </div>
         </td>
     </tr>
-    <tr class="even">
-        <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-        <td class="sorting_1">
-            <div class="d-flex justify-content-start align-items-center user-name">
-                <div class="avatar-wrapper">
-                    <div class="avatar me-3">
-                        <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                    </div>
-                </div>
-                <div class="d-flex flex-column">
-                    <a href="app-user-view-account.html" class="text-body text-truncate">
-                        <span class="fw-medium">Yoko Pottie</span>
-                    </a>
-                    <small class="text-muted">ypottiecprivacy.gov.au</small>
-                </div>
-            </div>
-        </td>
-        <td>
-            <span class="text-truncate d-flex align-items-center">
-                <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2">
-                    <i class="ti ti-user ti-sm"></i>
-                </span>Subscriber</span>
-            </td>
-            <td>
-                <span class="fw-medium">Basic</span>
-            </td>
-            <td>Auto Debit</td>
-            <td>
-                <span class="badge bg-label-secondary" text-capitalized="">Inactive</span>
-            </td>
-            <td class="" style="">
-                <div class="d-flex align-items-center">
-                    <a href="javascript:;" class="text-body"><i class="ti ti-edit ti-sm me-2"></i>
-                    </a>
-                    <a href="javascript:;" class="text-body delete-record">
-                        <i class="ti ti-trash ti-sm mx-2"></i>
-                    </a>
-                    <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end m-0">
-                        <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                        <a href="javascript:;" class="dropdown-item">Suspend</a>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr class="odd">
-            <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-            <td class="sorting_1">
-                <div class="d-flex justify-content-start align-items-center user-name">
-                    <div class="avatar-wrapper">
-                        <div class="avatar me-3">
-                            <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column">
-                        <a href="app-user-view-account.html" class="text-body text-truncate">
-                            <span class="fw-medium">Wesley Burland</span>
-                        </a>
-                        <small class="text-muted">wburlandjuiuc.edu</small>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <span class="text-truncate d-flex align-items-center">
-                    <span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2">
-                        <i class="ti ti-edit ti-sm"></i>
-                    </span>Editor</span>
-                </td>
-                <td>
-                    <span class="fw-medium">Team</span>
-                </td>
-                <td>Auto Debit</td>
-                <td>
-                    <span class="badge bg-label-secondary" text-capitalized="">Inactive</span>
-                </td>
-                <td class="" style="">
-                    <div class="d-flex align-items-center">
-                        <a href="javascript:;" class="text-body">
-                            <i class="ti ti-edit ti-sm me-2"></i>
-                        </a>
-                        <a href="javascript:;" class="text-body delete-record">
-                            <i class="ti ti-trash ti-sm mx-2"></i>
-                        </a>
-                        <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                            <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end m-0">
-                            <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                            <a href="javascript:;" class="dropdown-item">Suspend</a>
-                        </div>
-                    </div>
 
-                </td>
-            </tr>
-            <tr class="even">
-                <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-                <td class="sorting_1">
-                    <div class="d-flex justify-content-start align-items-center user-name">
-                        <div class="avatar-wrapper">
-                            <div class="avatar me-3">
-                                <span class="avatar-initial rounded-circle bg-label-secondary">VK</span>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <a href="app-user-view-account.html" class="text-body text-truncate">
-                                <span class="fw-medium">Vladamir Koschek</span>
-                            </a>
-                            <small class="text-muted">vkoschek17abc.net.au</small>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="text-truncate d-flex align-items-center">
-                        <span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2">
-                            <i class="ti ti-circle-check ti-sm"></i>
-                        </span>Author</span>
-                </td>
-                <td>
-                    <span class="fw-medium">Team</span>
-                </td>
-                <td>Manual - Paypal</td>
-                <td>
-                    <span class="badge bg-label-success" text-capitalized="">Active</span>
-                </td>
-                <td class="" style="">
-                    <div class="d-flex align-items-center">
-                        <a href="javascript:;" class="text-body">
-                            <i class="ti ti-edit ti-sm me-2"></i>
-                        </a>
-                        <a href="javascript:;" class="text-body delete-record">
-                            <i class="ti ti-trash ti-sm mx-2"></i>
-                        </a>
-                        <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                            <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end m-0">
-                            <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                            <a href="javascript:;" class="dropdown-item">Suspend</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="odd">
-                <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-                <td class="sorting_1">
-                    <div class="d-flex justify-content-start align-items-center user-name">
-                        <div class="avatar-wrapper">
-                            <div class="avatar me-3">
-                                <span class="avatar-initial rounded-circle bg-label-secondary">TW</span>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <a href="app-user-view-account.html" class="text-body text-truncate">
-                                <span class="fw-medium">Tyne Widmore</span>
-                            </a>
-                            <small class="text-muted">twidmore12bravesites.com</small>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="text-truncate d-flex align-items-center">
-                        <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2">
-                            <i class="ti ti-user ti-sm"></i>
-                        </span>Subscriber</span>
-                    </td>
-                    <td>
-                        <span class="fw-medium">Team</span>
-                    </td>
-                    <td>Manual - Cash</td>
-                    <td>
-                        <span class="badge bg-label-warning" text-capitalized="">Pending</span>
-                    </td>
-                    <td class="" style="">
-                        <div class="d-flex align-items-center">
-                            <a href="javascript:;" class="text-body">
-                                <i class="ti ti-edit ti-sm me-2"></i>
-                            </a>
-                            <a href="javascript:;" class="text-body delete-record">
-                                <i class="ti ti-trash ti-sm mx-2"></i>
-                            </a>
-                            <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end m-0">
-                                <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                                <a href="javascript:;" class="dropdown-item">Suspend</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="even">
-                    <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-                    <td class="sorting_1">
-                        <div class="d-flex justify-content-start align-items-center user-name">
-                            <div class="avatar-wrapper">
-                                <div class="avatar me-3">
-                                    <span class="avatar-initial rounded-circle bg-label-info">TB</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column">
-                                <a href="app-user-view-account.html" class="text-body text-truncate">
-                                    <span class="fw-medium">Travus Bruntjen</span>
-                                </a>
-                                <small class="text-muted">tbruntjenisitemeter.com</small>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="text-truncate d-flex align-items-center">
-                            <span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2">
-                                <i class="ti ti-device-laptop ti-sm"></i>
-                            </span>Admin</span>
-                        </td>
-                        <td>
-                            <span class="fw-medium">Enterprise</span>
-                        </td>
-                        <td>Manual - Cash</td>
-                        <td>
-                            <span class="badge bg-label-success" text-capitalized="">Active</span>
-                        </td>
-                        <td class="" style="">
-                            <div class="d-flex align-items-center">
-                                <a href="javascript:;" class="text-body">
-                                    <i class="ti ti-edit ti-sm me-2"></i>
-                                </a>
-                                <a href="javascript:;" class="text-body delete-record">
-                                    <i class="ti ti-trash ti-sm mx-2"></i>
-                                </a>
-                                <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end m-0">
-                                    <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                                    <a href="javascript:;" class="dropdown-item">Suspend</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="odd">
-                        <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-                        <td class="sorting_1">
-                            <div class="d-flex justify-content-start align-items-center user-name">
-                                <div class="avatar-wrapper"><div class="avatar me-3">
-                                    <img src="../../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle"></div>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <a href="app-user-view-account.html" class="text-body text-truncate">
-                                        <span class="fw-medium">Stu Delamaine</span>
-                                    </a>
-                                    <small class="text-muted">sdelamainekwho.int</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="text-truncate d-flex align-items-center">
-                                <span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2">
-                                    <i class="ti ti-circle-check ti-sm"></i>
-                                </span>Author</span>
-                            </td>
-                            <td>
-                                <span class="fw-medium">Basic</span>
-                            </td>
-                            <td>Auto Debit</td>
-                            <td>
-                                <span class="badge bg-label-warning" text-capitalized="">Pending</span>
-                            </td>
-                            <td class="" style="">
-                                <div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body">
-                                        <i class="ti ti-edit ti-sm me-2"></i>
-                                    </a>
-                                    <a href="javascript:;" class="text-body delete-record">
-                                        <i class="ti ti-trash ti-sm mx-2"></i>
-                                    </a>
-                                    <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end m-0">
-                                        <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                                        <a href="javascript:;" class="dropdown-item">Suspend</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="even">
-                            <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-                            <td class="sorting_1">
-                                <div class="d-flex justify-content-start align-items-center user-name">
-                                    <div class="avatar-wrapper">
-                                        <div class="avatar me-3">
-                                            <span class="avatar-initial rounded-circle bg-label-warning">SO</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <a href="app-user-view-account.html" class="text-body text-truncate">
-                                            <span class="fw-medium">Saunder Offner</span>
-                                        </a>
-                                        <small class="text-muted">soffner19mac.com</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="text-truncate d-flex align-items-center">
-                                    <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
-                                        <i class="ti ti-chart-pie-2 ti-sm"></i>
-                                    </span>Maintainer
-                                </span>
-                            </td>
-                            <td>
-                                <span class="fw-medium">Enterprise</span>
-                            </td>
-                            <td>Auto Debit</td>
-                            <td>
-                                <span class="badge bg-label-warning" text-capitalized="">Pending</span>
-                            </td>
-                            <td class="" style="">
-                                <div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body">
-                                        <i class="ti ti-edit ti-sm me-2"></i>
-                                    </a>
-                                    <a href="javascript:;" class="text-body delete-record">
-                                        <i class="ti ti-trash ti-sm mx-2"></i>
-                                    </a>
-                                    <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end m-0">
-                                        <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                                        <a href="javascript:;" class="dropdown-item">Suspend</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="odd">
-                            <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-                            <td class="sorting_1">
-                                <div class="d-flex justify-content-start align-items-center user-name">
-                                    <div class="avatar-wrapper">
-                                        <div class="avatar me-3">
-                                            <span class="avatar-initial rounded-circle bg-label-success">SM</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <a href="app-user-view-account.html" class="text-body text-truncate">
-                                            <span class="fw-medium">Stephen MacGilfoyle</span>
-                                        </a>
-                                        <small class="text-muted">smacgilfoyleybigcartel.com</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="text-truncate d-flex align-items-center">
-                                    <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
-                                        <i class="ti ti-chart-pie-2 ti-sm"></i>
-                                    </span>Maintainer</span>
-                                </td>
-                                <td><span class="fw-medium">Company</span></td>
-                                <td>Manual - Paypal</td>
-                                <td>
-                                    <span class="badge bg-label-warning" text-capitalized="">Pending</span>
-                                </td>
-                                <td class="" style="">
-                                    <div class="d-flex align-items-center">
-                                        <a href="javascript:;" class="text-body">
-                                            <i class="ti ti-edit ti-sm me-2"></i>
-                                        </a>
-                                        <a href="javascript:;" class="text-body delete-record">
-                                            <i class="ti ti-trash ti-sm mx-2"></i>
-                                        </a>
-                                        <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end m-0">
-                                            <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                                            <a href="javascript:;" class="dropdown-item">Suspend</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="even">
-                                <td class="control dtr-hidden" tabindex="0" style="display: none;"></td>
-                                <td class="sorting_1">
-                                    <div class="d-flex justify-content-start align-items-center user-name">
-                                        <div class="avatar-wrapper">
-                                            <div class="avatar me-3">
-                                                <img src="../../assets/img/avatars/9.png" alt="Avatar" class="rounded-circle">
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <a href="app-user-view-account.html" class="text-body text-truncate">
-                                                <span class="fw-medium">Skip Hebblethwaite</span>
-                                            </a>
-                                            <small class="text-muted">shebblethwaite10arizona.edu</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="text-truncate d-flex align-items-center">
-                                        <span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2">
-                                            <i class="ti ti-device-laptop ti-sm"></i>
-                                        </span>Admin</span>
-                                    </td>
-                                    <td>
-                                        <span class="fw-medium">Company</span>
-                                    </td>
-                                    <td>Manual - Cash</td>
-                                    <td>
-                                        <span class="badge bg-label-secondary" text-capitalized="">Inactive</span>
-                                    </td>
-                                    <td class="" style="">
-                                        <div class="d-flex align-items-center">
-                                            <a href="javascript:;" class="text-body">
-                                                <i class="ti ti-edit ti-sm me-2"></i>
-                                            </a>
-                                            <a href="javascript:;" class="text-body delete-record">
-                                                <i class="ti ti-trash ti-sm mx-2"></i>
-                                            </a>
-                                            <a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="ti ti-dots-vertical ti-sm mx-1"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end m-0">
-                                                <a href="app-user-view-account.html" class="dropdown-item">View</a>
-                                                <a href="javascript:;" class="dropdown-item">Suspend</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                  
+    </tbody>
   </table>

@@ -2,8 +2,11 @@
 
 export interface registerForm {
     name: string,
+    last_name: string,
     email: string,
     password: string,
-    // password2: string
+    confirm_password: string,
+    terms: boolean,
+    rol: string
   }
 

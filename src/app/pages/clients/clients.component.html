@@ -19,124 +19,96 @@
                 <button class="dt-button add-new btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
                     <span>
                         <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
-                        <span class="d-none d-sm-inline-block">Add New Client</span>
+                        <span class="d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Client</span>
                     </span>
                 </button> 
             </div>
         </div>
+        
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Create Client</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form 
+            autocomplete="off"
+            [formGroup]="clientForm"
+            (ngSubmit)="createClient()"
+            >
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="recipient-name"  formControlName="name"> 
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Last name:</label>
+                <input type="text" class="form-control" id="recipient-name" formControlName="last_name">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Email:</label>
+                <input type="text" class="form-control" id="recipient-name"  formControlName="email">
+              </div>
+              <div class="mb-3">
+                  <label for="message-text" class="col-form-label">Password:</label>
+                  <input type="text" class="form-control" id="recipient-name" formControlName="password">
+              </div>
+              <!-- <div class="col-md-6 mb-4">
+              <label for="selectpickerSubtext" class="form-label">Rol:</label>
+                  <div class="dropdown bootstrap-select w-100">
+                      <select id="selectpickerSubtext" class="selectpicker w-100" 
+                              data-style="btn-default" data-show-subtext="true" tabindex="null"
+                              formControlName="rol">
+                          <option value="ADMIN">Administrator</option>
+                          <option value="OPERATOR">Operator</option>
+                      </select>
+                  </div> 
+              </div>-->
+
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
     </div>
 </div>
-
+<br>
 <div class="table-responsive text-nowrap">
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Project</th>
+          <!-- <th>Project</th> -->
           <th>Client</th>
-          <th>Users</th>
+          <th>Email</th>
+          <th>Rol</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><i class="ti ti-brand-angular ti-lg text-danger me-3"></i> <span class="fw-medium">Angular Project</span></td>
-          <td>Albert Cook</td>
+        <tr *ngFor="let client of clients">
+          <td><i class="ti ti-brand-angular ti-lg text-danger me-3"></i> <span class="fw-medium">{{ client.name }} {{ client.last_name }}</span></td>
+          <td>{{ client.email }}</td>
           <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Sophia Wilkerson" data-bs-original-title="Sophia Wilkerson">
-                <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Christina Parker" data-bs-original-title="Christina Parker">
-                <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-              </li>
-            </ul>
+            <span class="text-truncate d-flex align-items-center">
+              <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
+                  <i class="ti ti-chart-pie-2 ti-sm"></i>
+              </span> {{ client.rol }} </span>
           </td>
-          <td><span class="badge bg-label-primary me-1">Active</span></td>
           <td>
-            <div class="dropdown">
-              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-pencil me-1"></i> Edit</a>
-                <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-trash me-1"></i> Delete</a>
-              </div>
-            </div>
+            <span class="text-truncate d-flex align-items-center">
+              <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
+                  <i class="ti ti-chart-pie-2 ti-sm"></i>
+              </span> {{ client.status }} </span>
           </td>
-        </tr>
-        <tr>
-          <td><i class="ti ti-brand-react-native ti-lg text-info me-3"></i> <span class="fw-medium">React Project</span></td>
-          <td>Barry Hunter</td>
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Sophia Wilkerson" data-bs-original-title="Sophia Wilkerson">
-                <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Christina Parker" data-bs-original-title="Christina Parker">
-                <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-              </li>
-            </ul>
-          </td>
-          <td><span class="badge bg-label-success me-1">Completed</span></td>
-          <td>
-            <div class="dropdown">
-              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-pencil me-1"></i> Edit</a>
-                <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-trash me-1"></i> Delete</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td><i class="ti ti-brand-vue ti-lg text-success me-3"></i> <span class="fw-medium">VueJs Project</span></td>
-          <td>Trevor Baker</td>
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Sophia Wilkerson" data-bs-original-title="Sophia Wilkerson">
-                <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Christina Parker" data-bs-original-title="Christina Parker">
-                <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-              </li>
-            </ul>
-          </td>
-          <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-          <td>
-            <div class="dropdown">
-              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-pencil me-1"></i> Edit</a>
-                <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-trash me-1"></i> Delete</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td><i class="ti ti-brand-bootstrap ti-lg text-primary me-3"></i> <span class="fw-medium">Bootstrap Project</span></td>
-          <td>Jerry Milton</td>
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Sophia Wilkerson" data-bs-original-title="Sophia Wilkerson">
-                <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="Christina Parker" data-bs-original-title="Christina Parker">
-                <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-              </li>
-            </ul>
-          </td>
-          <td><span class="badge bg-label-warning me-1">Pending</span></td>
+
+          <!-- <td><span class="badge bg-label-primary me-1">Active</span></td> -->
           <td>
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
