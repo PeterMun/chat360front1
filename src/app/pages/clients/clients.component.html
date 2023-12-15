@@ -38,13 +38,21 @@
             [formGroup]="clientForm"
             (ngSubmit)="createClient()"
             >
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Name:</label>
                 <input type="text" class="form-control" id="recipient-name"  formControlName="name"> 
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Last name:</label>
                 <input type="text" class="form-control" id="recipient-name" formControlName="last_name">
+              </div> -->
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Full name:</label>
+                <input type="text" class="form-control" id="recipient-name" formControlName="fullname">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Phone:</label>
+                <input type="text" class="form-control" id="recipient-name" formControlName="phone">
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Email:</label>
@@ -85,6 +93,7 @@
         <tr>
           <!-- <th>Project</th> -->
           <th>Client</th>
+          <th>Phone</th>
           <th>Email</th>
           <th>Rol</th>
           <th>Status</th>
@@ -93,7 +102,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let client of clients">
-          <td><i class="ti ti-brand-angular ti-lg text-danger me-3"></i> <span class="fw-medium">{{ client.name }} {{ client.last_name }}</span></td>
+          <td>
+            <!-- <span class="fw-medium">{{ client.name }} {{ client.last_name }}</span> -->
+            <span class="fw-medium">{{ client.fullname }}</span>
+          </td>
+          <td>
+            <span class="fw-medium">{{ client.phone }}</span>
+          </td>
           <td>{{ client.email }}</td>
           <td>
             <span class="text-truncate d-flex align-items-center">

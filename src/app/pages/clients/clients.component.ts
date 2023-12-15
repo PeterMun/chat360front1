@@ -19,8 +19,10 @@ export class ClientsComponent {
 
   
   public clientForm: FormGroup =  this.fb.group({
-    name: ['', Validators.required],
-    last_name: ['', Validators.required],
+    // name: ['', Validators.required],
+    // last_name: ['', Validators.required],
+    fullname: ['', Validators.required],
+    phone: ['', Validators.required], 
     email: [ '', [ Validators.required, Validators.email ] ],
     password: [ '', Validators.required ],
     user: [ '6554a6dbcb9c935f7d16b8ef' ]

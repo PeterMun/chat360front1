@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketsService } from '../services/sockets.service';
 
 
 
@@ -12,12 +13,15 @@ declare function customInitFunctions(): any;
 })
 export class PagesComponent implements OnInit {
 
-  constructor(){
+  constructor(
+    
+  ){
 
   }
 
   ngOnInit(): void {
       customInitFunctions();
+
   }
 
 

@@ -24,8 +24,9 @@ export class ChatComponent implements OnInit{
     this.socketService.listen('message').subscribe((data) => {
       console.log('Received message:', data);
     });
-    
+
   }
+
 
   
 
