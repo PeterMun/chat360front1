@@ -10,7 +10,7 @@ export class Client {
       public rol?: string,
       public phone?: string,
       public status?: string,
-      public uid?: string,
+      public user?: string,
       public cid?: string
     ){
   

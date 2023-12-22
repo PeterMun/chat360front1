@@ -8,7 +8,7 @@ import { PagesComponent } from './pages.component';
 import { UsersComponent } from './users/users.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ClientsComponent } from './clients/clients.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -37,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
     
   ]
 })

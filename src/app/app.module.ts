@@ -8,6 +8,7 @@ import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './auth/auth.module';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -22,6 +23,7 @@ import { RouterModule } from '@angular/router';
         AppRoutingModule,
         PagesModule,
         AuthModule,
+        ReactiveFormsModule
   
     ],
     providers: [],

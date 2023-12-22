@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { loginForm } from '../interfaces/login.interface';
 
-const base_url = environment.baseUrl;
+const base_url = environment.baseUrl_;
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +27,8 @@ export class AuthService {
       .pipe(
         tap( (resp : any) =>{
           console.log(resp);
-          localStorage.setItem('token', resp.token)
-          
+          localStorage.setItem('token', resp.body.accessToken)
+          // localStorage.setItem('menu', resp.menu)
         } )
       )
   
@@ -36,7 +36,9 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem('token');
+    // delete routes
     this.router.navigateByUrl('/login')
+
   }
 
 

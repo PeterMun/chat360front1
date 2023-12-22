@@ -12,6 +12,7 @@ import { User } from '../models/users';
 
 
 const base_url = environment.baseUrl;
+const ipUrl = environment.urlIp;
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,19 @@ export class UsersService {
     private http: HttpClient,
     private router: Router,
     private ngZone: NgZone
-  ) { }
+  ) {   }
+
+  getIp(){
+    return this.http.get( ipUrl )
+      .pipe(
+        map( (resp: any) => {
+          console.log(resp.query);
+          let ip = resp.query
+          return ip;
+          
+        } )
+      )
+  }
 
   get token(): string {
     return localStorage.getItem( 'token' ) || '';
@@ -70,10 +83,11 @@ export class UsersService {
         .pipe(
           tap( (resp : any) =>{
             console.log(resp);
-            localStorage.setItem('token', resp.token)
-            
+            this.saveLocalStorage( resp.token, resp.menu );
           } )
         )
+
+        
     
   }
 
@@ -102,19 +116,28 @@ export class UsersService {
           rol,
           uid
         );
-        
-
-        
-        localStorage.setItem('token', resp.token);
+            this.saveLocalStorage( resp.token, resp.menu );
       } ),
       map( resp => true ),
       catchError( error => {
         console.log(error);
         return of(false);
         
-      })//of(false) )
+      })
     )
 
   }
+
+
+  updateUuser(){
+    
+  }
+
+  saveLocalStorage( token: string, menu: any ){
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu))
+  }
+
+
 
 }

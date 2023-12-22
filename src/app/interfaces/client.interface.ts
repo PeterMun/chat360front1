@@ -7,7 +7,8 @@ export interface clientForm {
   password: string,
   phone: string,
   status: string,
-  user: string
+  user: string,
+  cid: string
   // direccion: string,
   // correo_electronico: string,
 }

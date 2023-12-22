@@ -18,9 +18,8 @@ export class RegisterComponent {
   public formSubmitted = false;
 
   public registerForm =  this.fb.group({
-    // name: ['', Validators.required],
-    // last_name: ['', Validators.required],
-    fullname: ['', Validators.required],
+    name: ['', Validators.required],
+    last_name: ['', Validators.required],
     email: [ '', [ Validators.required, Validators.email ] ],
     password: [ '', Validators.required ],
     confirm_password: [ '', Validators.required ],
@@ -34,7 +33,21 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private userService: UsersService,
     private router: Router
-  ){}
+  ){
+    this.getip()
+  }
+
+  getip(){
+    console.log('this ip');
+    this.userService.getIp()
+      .subscribe( (resp)   => {
+        console.log(resp);
+        console.log('resp');
+        
+        
+      });
+    
+  }
 
   createUser(){
     this.formSubmitted = true;

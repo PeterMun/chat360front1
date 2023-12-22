@@ -25,7 +25,7 @@ export class ClientsComponent {
     phone: ['', Validators.required], 
     email: [ '', [ Validators.required, Validators.email ] ],
     password: [ '', Validators.required ],
-    user: [ '6554a6dbcb9c935f7d16b8ef' ]
+    user: [ localStorage.getItem('uid') ]
   });
 
   constructor(
@@ -51,11 +51,29 @@ export class ClientsComponent {
           console.log('created user');
           console.log(resp);
           window.location.reload();
-          
-          
+           
         }, ( err ) => {
           Swal.fire('Error', err.error.msg, 'error')
         } )
+  }
+
+  updateClient( client: Client ){
+    console.log(client.cid);
+    console.log(client.fullname);
+    console.log(client.user);
+    
+    this.clientService.updateClient(
+      client.cid as string,
+      client.fullname,
+      client.email,
+      client.password as string,
+      client.phone as string,
+      client.status as string
+    )
+      .subscribe( resp => {
+        Swal.fire('Updated', client.fullname, 'success')
+      } )
+    
 
   }
 

@@ -33,14 +33,6 @@
                           <label for="recipient-name" class="col-form-label">Recipient:</label>
                           <input type="text" class="form-control" id="recipient-name">
                         </div>
-                        <div class="mb-3">
-                          <label for="message-text" class="col-form-label">Message:</label>
-                          <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                          <label for="message-text" class="col-form-label">Message:</label>
-                          <input type="text" class="form-control" id="recipient-name">
-                        </div>
                       </form>
                     </div>
                     <div class="modal-footer">
@@ -72,8 +64,8 @@
                       alt="Avatar" />
                   </div>
                   <div class="chat-contact-info flex-grow-1 ms-2">
-                    <h6 class="m-0">John Doe</h6>
-                    <small class="user-status text-muted">Coordinator</small>
+                    <h6 class="m-0">{{ user?.name  }} {{ user?.last_name }}</h6>
+                    <small class="user-status text-muted">{{ user?.rol }}</small>
                   </div>
                 </div>
                 <i class="ti ti-x cursor-pointer d-lg-none d-block position-absolute mt-2 me-1 top-0 end-0"></i>
@@ -88,7 +80,7 @@
                   <li class="chat-contact-list-item chat-list-item-0 d-none">
                     <h6 class="text-muted mb-0">No Chats Found</h6>
                   </li>
-                  <li class="chat-contact-list-item">
+                  <!-- <li class="chat-contact-list-item">
                     <a class="d-flex align-items-center">
                       <div class="flex-shrink-0 avatar avatar-online">
                         <img src="../../assets/img/avatars/13.png" alt="Avatar" class="rounded-circle" />
@@ -101,7 +93,7 @@
                       </div>
                       <small class="text-muted mb-auto">5 Minutes</small>
                     </a>
-                  </li>
+                  </li> -->
                   <li class="chat-contact-list-item active">
                     <a class="d-flex align-items-center">
                       <div class="flex-shrink-0 avatar avatar-offline">
@@ -116,7 +108,7 @@
                       <small class="text-muted mb-auto">30 Minutes</small>
                     </a>
                   </li>
-                  <li class="chat-contact-list-item">
+                  <!-- <li class="chat-contact-list-item">
                     <a class="d-flex align-items-center">
                       <div class="flex-shrink-0 avatar avatar-busy">
                         <span class="avatar-initial rounded-circle bg-label-success">CM</span>
@@ -129,7 +121,7 @@
                       </div>
                       <small class="text-muted mb-auto">1 Day</small>
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
                 <!-- Contacts -->
                 <!-- /Contacts -->
@@ -163,10 +155,10 @@
                         <button class="btn btn-primary me-sm-3 me-1">Add people to this chat</button>
                       </i>
                       <!-- <i class="ti ti-phone-call cursor-pointer d-sm-block d-none me-3"></i> -->
-                      <i class="ti ti-video cursor-pointer d-sm-block d-none me-3"></i>
+                      <!-- <i class="ti ti-video cursor-pointer d-sm-block d-none me-3"></i> -->
                       <i class="ti ti-search cursor-pointer d-sm-block d-none me-3"></i>
                       <div class="dropdown d-flex align-self-center">
-                        <button
+                        <!-- <button
                           class="btn p-0"
                           type="button"
                           id="chat-header-actions"
@@ -174,20 +166,38 @@
                           aria-haspopup="true"
                           aria-expanded="false">
                           <i class="ti ti-dots-vertical"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="chat-header-actions">
+                        </button> -->
+                        <!-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="chat-header-actions">
                           <a class="dropdown-item" href="javascript:void(0);">View Contact</a>
                           <a class="dropdown-item" href="javascript:void(0);">Mute Notifications</a>
                           <a class="dropdown-item" href="javascript:void(0);">Block Contact</a>
                           <a class="dropdown-item" href="javascript:void(0);">Clear Chat</a>
                           <a class="dropdown-item" href="javascript:void(0);">Report</a>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="chat-history-body bg-body">
-                  <ul class="list-unstyled chat-history">
+                 <div id="chat-messages">
+                  
+                  <li class="chat-message chat-message-right" *ngFor="let msg of messages">
+                    <div class="d-flex overflow-hidden">
+                      <div class="chat-message-wrapper flex-grow-1">
+                        <div class="chat-message-text">
+                          <p class="mb-0" style="color: black;">
+                            {{ msg.from }}: {{ msg.body }}
+                          </p>
+                        </div>
+                        <!-- <div class="text-end text-muted mt-1">
+                          <i class="ti ti-checks ti-xs me-1 text-success"></i>
+                          <small>10:00 AM</small>
+                        </div> -->
+                      </div>
+                    </div>
+                    
+                  </li>
+               
+                  <!--<ul class="list-unstyled chat-history">
                     <li class="chat-message chat-message-right">
                       <div class="d-flex overflow-hidden">
                         <div class="chat-message-wrapper flex-grow-1">
@@ -363,21 +373,26 @@
                         </div>
                       </div>
                     </li>
-                  </ul>
-                </div>
+                  </ul>-->
+                </div> 
                 <!-- Chat message form -->
                 <div class="chat-history-footer shadow-sm">
-                  <form class="form-send-message d-flex justify-content-between align-items-center">
+                  <form class="form-send-message d-flex justify-content-between align-items-center"
+                  (submit) = "sendText()">
                     <input
-                      class="form-control message-input border-0 me-3 shadow-none"
-                      placeholder="Type your message here" />
+                      class="form-control"
+                      placeholder="Type your message here" 
+                      type="text"
+                      name="text"
+                      [(ngModel)]="text"/>
                     <div class="message-actions d-flex align-items-center">
                       <!-- <i class="speech-to-text ti ti-microphone ti-sm cursor-pointer"></i> -->
                       <label for="attach-doc" class="form-label mb-0">
                         <i class="ti ti-photo ti-sm cursor-pointer mx-3"></i>
                         <input type="file" id="attach-doc" hidden />
                       </label>
-                      <button class="btn btn-primary d-flex send-msg-btn">
+                      <button class="btn btn-primary d-flex send-msg-btn" 
+                        >
                         <i class="ti ti-send me-md-1 me-0"></i>
                         <span class="align-middle d-md-inline-block d-none">Send</span>
                       </button>

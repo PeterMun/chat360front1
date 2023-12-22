@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit{
   public loginForm: FormGroup =  this.fb.group({
     email: [ localStorage.getItem('email') || '', [ Validators.required, Validators.email ] ],
     password: [ '', Validators.required ],
-    remember: [false]
+    //remember: [false],
+    ip: ['2.2.2.2']
 
   });
 
@@ -40,29 +41,37 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
   }
 
+
+
   login(  ){
     // console.log(this.loginForm.value);
     this.authService.login( this.loginForm.value )
       .subscribe( resp => {
-        console.log('login user');
-        console.log(resp);
-        localStorage.setItem('uid', resp.uid);
+        console.log(resp.body.userData);
+        
+        localStorage.setItem('uid', resp.body.userData.id);
         if( this.loginForm.get('remember')?.value ){
           localStorage.setItem('email', this.loginForm.get('email')?.value)
-          this.router.navigateByUrl('/');
+          // this.router.navigateByUrl('/');
         }else{
           localStorage.removeItem('email')
-          this.router.navigateByUrl('/');
         }
         
-        // this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/');
         
       }, (err) => {
-        //console.warn(err.error.msg)
         Swal.fire('Error', err.error.msg, 'error')
         
       }
       );
+  }
+
+  nonValidField( field: string ): boolean{
+    if( this.loginForm.get(field)?.value && this.formSubmitted ){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 

@@ -53,6 +53,30 @@ export class ClientsService {
             )
   }
 
+  updateClient(
+    cid: string,
+    fullname: string,
+    email: string,
+    password: string,
+    phone: string,
+    status: string
+  ){
+    return this.http.put( `${ base_url }/clients/${ cid }`, {
+      cid,
+      fullname,
+      email,
+      password,
+      phone,
+      status
+    }, this.headers )
+    .pipe(
+      tap( ( resp: any ) => {
+        console.log(resp);
+      } )
+    )
+
+  }
+
 
 
 

@@ -89,6 +89,12 @@
                     autofocus />
                 </div>
                 <div class="mb-3">
+                  <div class="col text-danger">
+                    <a *ngIf="nonValidField('name')">The first name is mandatory</a>
+                  </div>
+
+                </div>
+                <div class="mb-3">
                   <label for="username" class="form-label">Last Name</label>
                   <input
                     type="text"
@@ -98,6 +104,11 @@
                     placeholder="Enter your last name"
                     formControlName="last_name"
                     autofocus />
+                </div>
+                <div class="mb-3">
+                  <div class="col text-danger">
+                    <a *ngIf="nonValidField('last_name')">The last name is mandatory</a>
+                  </div>
                 </div>
                 <!-- <div class="mb-3">
                   <label for="username" class="form-label">Full Name</label>
@@ -121,6 +132,13 @@
                         formControlName="email"
                         />
                 </div>
+
+                <div class="mb-3">
+                  <div class="col text-danger">
+                    <a *ngIf="nonValidField('email')">The email is mandatory</a>
+                  </div>
+                </div>
+
                 <div class="mb-3 form-password-toggle">
                   <label class="form-label" for="password">Password</label>
                   <div class="input-group input-group-merge">
@@ -134,6 +152,11 @@
                       formControlName="password"
                       />
                     <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="col text-danger">
+                    <a *ngIf="nonValidField('password')">The password is mandatory</a>
                   </div>
                 </div>
                 <div class="mb-3 form-password-toggle">
@@ -152,6 +175,12 @@
                 </div>
 
                 <div class="mb-3">
+                  <div class="col text-danger">
+                    <a *ngIf="nonValidField('confirm_password')">The confirm password is mandatory</a>
+                  </div>
+                </div>
+
+                <div class="mb-3">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" formControlName="terms"/>
                     <label class="form-check-label" for="terms-conditions">
@@ -163,29 +192,18 @@
 
                 <div class="mb-3">
                   <div class="col text-danger">
-                    <a *ngIf="nonValidField('name')">The name is mandatory</a>
+                    <a *ngIf="acceptedTerms()">The terms must be accepted</a>
                   </div>
 
                 </div>
-                <div class="mb-3">
-                  <div class="col text-danger">
-                    <a *ngIf="nonValidField('last_name')">The last name is mandatory</a>
 
-                  </div>
-
-                </div>
                 <div class="mb-3">
                   <div class="col text-danger">
                     <a *ngIf="noValidPasswords()">The passwords must be the same</a>
                   </div>
 
                 </div>
-                <div class="mb-3">
-                  <div class="col text-danger">
-                    <a *ngIf="acceptedTerms()">The terms must be accepted</a>
-                  </div>
 
-                </div>
 
 
                 <button class="btn btn-primary d-grid w-100">Sign up</button>

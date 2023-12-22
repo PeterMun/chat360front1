@@ -8,6 +8,7 @@ import { ChatComponent } from "./chat/chat.component";
 import { UsersComponent } from "./users/users.component";
 import { ClientsComponent } from "./clients/clients.component";
 import { authGuard } from '../guards/auth.guard';
+import { ClientChatComponent } from "./client-chat/client-chat.component";
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
             { path: '', component: DashboardComponent },
             { path: 'chat', component: ChatComponent },
             { path: 'users', component: UsersComponent },
-            { path: 'clients', component: ClientsComponent }
+            { path: 'clients', component: ClientsComponent },
+            { path: 'chatClient', component: ClientChatComponent }
         ]
     }
 ]

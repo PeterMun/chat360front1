@@ -75,7 +75,7 @@
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Apps &amp; Pages</span>
     </li>
-    <li class="menu-item" *ngFor="let item of menuItems">
+    <li class="menu-item" *ngFor="let item of sidebarService.menu">
       <a [routerLink]="item.url" class="menu-link">
         <i class="menu-icon tf-icons {{ item.icon }}"></i>
         <div>{{ item.title }}</div>

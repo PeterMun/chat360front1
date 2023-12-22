@@ -8,14 +8,9 @@ import { SocketsService } from './services/sockets.service';
 })
 export class AppComponent implements OnInit{
 
-  constructor(
-    private socketService: SocketsService
-  ){}
+  constructor(){}
 
   ngOnInit(): void {
-    this.socketService.listen('message').subscribe((data) => {
-      console.log('Received message:', data);
-    });
   }
 
 

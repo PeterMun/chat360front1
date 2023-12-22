@@ -346,4 +346,11 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0.375rem !important;
   }
+
+  #chat-messages{
+    height: 300px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    overflow-y: scroll;
+  }
   

@@ -80,7 +80,7 @@
 
                     >
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
+                  <label class="form-label">Email</label>
                   <input
                     type="text"
                     class="form-control"
@@ -90,6 +90,14 @@
                     formControlName="email"
                     autofocus />
                 </div>
+                
+                <div class="mb-3">
+                  <div class="col text-danger">
+                    <a *ngIf="nonValidField('email')">The email is mandatory</a>
+                  </div>
+
+                </div>
+
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Password</label>
@@ -106,8 +114,18 @@
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password" 
                       formControlName="password"/>
-                    <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    <span class="input-group-text cursor-pointer">
+                      <i class="ti ti-eye-off"></i>
+                    </span>
                   </div>
+                                 
+                <div class="mb-3">
+                  <div class="col text-danger">
+                    <a *ngIf="nonValidField('password')">The password is mandatory</a>
+                  </div>
+
+                </div>
+                  
                 </div>
                 <div class="mb-3">
                   <div class="form-check">
@@ -118,9 +136,15 @@
                     <label class="form-check-label" for="remember-me"> Remember Me </label>
                   </div>
                 </div>
+
+                
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
+
+
+
+
               </form>
 
               <p class="text-center">
